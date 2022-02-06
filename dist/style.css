@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: lightslategray;
+}
+
+body {
+    height: 100vh;
+    background-color: #C2D3CD;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.bulma-control-extend {
+    @extend %control;
+    background: orange;
+    color: black;
+}
+
+/* .notification.is-primary {
+    position: absolute;
+    z-index: 1;
+} */
+
+  /* .bulma-control-mixin {
+    @include control-medium;
+    &.is-medium {
+      @include control-medium;
+    }
+  } */
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* h1 {
+    background-color: teal;
+} */
+
+.nav {
+    padding-bottom: 50px;
+    margin-bottom: 70px;
+    background-color: darkorange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    font-family: system-ui;
+}
+
+.column,.card {
+    background-color: gray;
+    margin-inline: auto;
+}

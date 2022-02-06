@@ -6,11 +6,12 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const generateHTML = require("./dist/generateHTML.js");
+const outputFile = "./dist/index.html";
 const path = require("path");
 const teamMember = [];
 const id = [];
 
-function startProgram() {
+
   function createManager() {
     inquirer
       .prompt([
@@ -25,19 +26,6 @@ function startProgram() {
                 return true;
               }
           }
-        },
-        {
-          type: "input",
-          name: "officeNumber",
-          massage: "Enter the Office Number:",
-          validate: (response) => {
-            const office = response.match(/^[1-9]\d*$/);
-            if (office) {
-              return true;
-            } else {
-              return "Please enter valid number";
-            }
-          },
         },
         {
           type: "input",
@@ -65,13 +53,26 @@ function startProgram() {
             }
           },
         },
+        {
+          type: "input",
+          name: "officeNumber",
+          massage: "Enter the Office Number:",
+          validate: (response) => {
+            const office = response.match(/^[1-9]\d*$/);
+            if (office) {
+              return true;
+            } else {
+              return "Please enter valid number";
+            }
+          },
+        },
       ])
       .then((responses) => {
         const manager = new Manager(
           responses.managerName,
-          responses.officeNumber,
           responses.managerId,
-          responses.managerEmail
+          responses.managerEmail,
+          responses.officeNumber,
         );
         teamMember.push(manager);
         id.push(responses.managerId);
@@ -221,18 +222,16 @@ function startProgram() {
         }
       });
   };
-};
 
-function writeToFile(fileName, data) {
-  return fs.writeFileSync(path.join(process.cwd(), "src", fileName), data);
+function buildTeam() {
+  generateHTML(teamMember);
 };
-
-// function init() {
-//   inquirer.prompt(questions).then((returnedData) => {
-//     writeToFile("index.html", generateHTML({ ...returnedData }));
-//   });
-// }
 
 // function call to initialize app
+function startProgram() {
+  createManager();
+};
+
 startProgram();
+
 
